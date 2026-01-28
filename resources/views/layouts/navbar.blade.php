@@ -15,6 +15,14 @@
             </svg>
         </button>
 
+        @guest
+            <a href="{{ route('login') }}"
+               class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-3 focus:outline-none">Login</a>
+
+            <a href="{{ route('register') }}"
+               class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 focus:outline-none">Register</a>
+        @endguest
+        @auth
         <div class="hidden w-full lg:flex lg:w-auto" id="navbar-menu">
             <ul class="flex flex-col lg:flex-row lg:items-center lg:space-x-1 mt-4 lg:mt-0 font-medium">
                 <li>
@@ -46,7 +54,17 @@
                     </a>
                 </li>
             </ul>
+            <form method="POST" action="{{ route('logout') }}" >
+                @csrf
+
+                <x-responsive-nav-link :href="route('logout')"
+                                       onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </x-responsive-nav-link>
+            </form>
         </div>
+        @endauth
     </div>
 </nav>
 
